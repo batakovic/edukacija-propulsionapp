@@ -1,0 +1,114 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Data grid - Style</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="../js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+                <script src="js/plugin_2.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='../css/style.css'>
+    </head>
+    <body>
+        <div id="content">
+            <div id="header">
+            <h1>Data grid - Style ( zebra )</h1>
+        </div>
+            <div class="row">
+                <p class="text">
+                   Da bi tabela bila preglednija, obojicemo svaku drugu kolonu.
+                   Da bi to uradili potrebne su nam 2 klase, i funkciju koja ce nam
+                   vracati odgovarajucu klasu
+                </p>
+                <pre class="code">
+   var configDefault = {
+        headCellClass  : "datagridHeadCell" ,
+        oddRowClass    : "datagridOddRow",
+        evenRowClass   : "datagridEvenRow"
+    }
+
+
+    //method
+    rowClass : function(config, rowIndex) {
+                if( (rowIndex % 2) ==  0) return config.evenRowClass;
+                    return config.oddRowClass;
+            }
+                </pre>
+            </div>
+            <div class="row">
+                <p class="text">
+                 Funkcija u odnosu na redni broj row-a, vraca klasu 
+                    
+                </p>
+                
+                <p class="text">
+                    <table id="dataGridTable" cellspacing="0" cellpadding="5">
+                        
+                    </table>
+                </p>
+            </div>
+            <pre class="code">
+<code>
+       jQuery.fn.datagrid = function (configOverride, data) {
+        //config section 
+        var configDefault = {
+            headCellClass : 'datagridHeadCell',
+            oddRowClass    : "datagridOddRow",
+            evenRowClass   : "datagridEvenRow"
+        }
+        var config = jQuery.extend(true, configDefault, configOverride);
+        
+        //utility function section
+        
+        var functions = {
+            header : function (config, table) {
+                console.log(config.columns.length);
+                var row;
+                for (var i = 0; i < config.columns.length; i++){
+                    row += "<td class = '" + config.headCellClass + "'>" 
+                        + config.columns[i].title + "</td>";
+                }
+                table.append("<tr>" + row + "</tr>");
+            },
+            rows : function(config, table, data) {
+                 for( var i =0; i < data.length; i++) {
+                    var rowClass = this.rowClass(config, i);
+                    var row = "< tr class='" + rowClass + "'>";
+                    for (var j = 0; j < config.columns.length; j++) {
+                        row += "<td>" + data[i][config.columns[j].property] + "</td>";
+                    }
+                    table.append(row + "</tr>");
+                }
+            },
+            rowClass : function(config, rowIndex) {
+                if( (rowIndex % 2) ==  0) return config.evenRowClass;
+                    return config.oddRowClass;
+            }
+        }
+        //data grid generate
+        
+        this.each(function(){
+            var table = jQuery(this);
+            table.data('config', config);
+            table.empty();
+            functions.header(config, table);
+            functions.rows(config, table, data);
+        });
+    }
+    
+        $("#dataGridTable").datagrid(config, data);
+        </code>
+            </pre>
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+/* 
+    Document   : style
+    Created on : May 10, 2013, 12:33:38 PM
+    Author     : propulsion
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#header, #content, #footer {
+    margin: auto;
+    width: 70%;
+}
+
+#header {
+    text-align: center;
+}
+
+#content, #footer{
+    border: #ADD8E6  1px solid;
+    margin-bottom: 15px;
+}
+
+#content h2 {
+    margin: auto;
+    color: #444444;
+    margin-left: 15px;
+}
+
+.row p, .row pre {
+    margin: 15px;
+    font-size: 18px;
+}
+
+.text {
+    padding: 5px
+}
+
+.code {
+    background-color: #F2E9AE;
+    border: #BFB156 1px solid;
+    padding: 5px;
+}
+
+#content ol li a{
+    font-size: 20px;
+    text-decoration: none;
+}
+
+
+.datagridHeadCell {
+    font-family: Arial;
+    font-weight: bold;
+    background-color : #eeeeee;
+}
+.datagridEvenRow {
+    background-color : #ffffff;
+}
+.datagridOddRow {
+    background-color : #ccffcc;
+   
+    overflow-x : hidden;
+}
+.datagridCell {
+    overflow : hidden;
+    float    : left;
+    height   : 20px;
+    width    : 50px;
+    white-space:nowrap;
+}
+.datagridSelectedRow {
+    background-color : #ccccff;
+}
